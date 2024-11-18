@@ -1,0 +1,50 @@
+
+<div *ngIf="isLoading" class="loadingScreen position-fixed top-0 bottom-0 start-0 end-0 bg-white d-flex justify-content-center align-items-center">
+
+    <span class="loader"></span>
+
+</div>
+
+
+<div class="d-flex justify-content-between mt-5">
+    <p class="text-main"><span class="fw-bolder">Number Of Cart Items</span> : {{numberOfCartItems}}</p>
+    <p class="text-main"><span class="fw-bolder">Total Price</span> : {{totalPrice}}</p>
+
+
+</div>
+
+<button (click)="clearCart()" class="btn btn-outline-danger ms-auto d-block mb-3">Clear Cart</button>
+
+<div *ngFor="let productItem of productList" class="row shadow-sm p-3 mb-4">
+
+    <div class="col-md-1">
+
+        <img class="w-100" [src]="productItem.product.imageCover" alt="">
+
+    </div>
+
+    <div class="col-md-11 d-flex justify-content-between">
+
+        <div>
+            <h4>{{productItem.product.title}}</h4>
+            <p>Price : {{productItem.price}} </p>
+            <span (click)="removeProductFromCart(productItem.product.id)" class="text-danger fw-bolder cursor-pointer  "><i class="fa fa-trash p-2"></i>Remove Product </span>
+
+        </div>
+
+
+        <div>
+            <button (click)="updateCartProductQuantity(productItem.product.id, productItem.count +1 )" class="btn bg-main text-white">+</button>
+            <span class="p-3">{{productItem.count}}</span>
+            <button (click)="updateCartProductQuantity(productItem.product.id, productItem.count -1 )" class="btn bg-main text-white">-</button>
+           
+        </div>
+
+    </div>
+
+    
+
+
+</div>
+
+<button class="btn bg-main text-white ms-auto d-block">Pay</button>
